@@ -78,8 +78,6 @@ services:
     env_file:
       - ./apps/api/.env
     depends_on:
-      - plane-db
-      - plane-redis
       - plane-mq
     ports:
       - "8000:8000"
@@ -100,8 +98,6 @@ services:
       - ./apps/api/.env
     depends_on:
       - api
-      - plane-db
-      - plane-redis
 
   beat-worker:
     build:
@@ -119,8 +115,6 @@ services:
       - ./apps/api/.env
     depends_on:
       - api
-      - plane-db
-      - plane-redis
 
   migrator:
     build:
@@ -136,9 +130,6 @@ services:
     command: ./bin/docker-entrypoint-migrator.sh --settings=plane.settings.local
     env_file:
       - ./apps/api/.env
-    depends_on:
-      - plane-db
-      - plane-redis
 
 volumes:
   redisdata:
