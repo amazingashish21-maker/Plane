@@ -131,6 +131,21 @@ services:
     env_file:
       - ./apps/api/.env
 
+  live:
+    build:
+      context: .
+      dockerfile: ./apps/live/Dockerfile.live
+      args:
+        DOCKER_BUILDKIT: 1
+    restart: unless-stopped
+    networks:
+      - dev_env
+    ports:
+      - "3100:3100"
+    env_file:
+      - ./apps/live/.env
+
+
 volumes:
   redisdata:
   uploads:
